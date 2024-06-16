@@ -2,6 +2,7 @@
 	"dependencies": {
 		"@gltf-transform/core": "^4.0.1",
 		"@gltf-transform/extensions": "^4.0.1",
+		"@gltf-transform/functions": "^4.0.1",
 		"axios": "^1.7.2",
 		"draco3dgltf": "^1.5.7",
 		"gltf-pipeline": "^4.1.0",
@@ -19,12 +20,12 @@
 	},
 	"pnpm": {
 		"supportedArchitectures": {
-		  "libc": [
-			"musl"
-		  ]
+			"libc": [
+				"musl"
+			]
 		},
 		"overrides": {
-		  "sharp": "0.33.3"
+			"sharp": "0.33.3"
 		}
-	  }
+	}
 }

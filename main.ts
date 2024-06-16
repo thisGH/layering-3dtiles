@@ -4,10 +4,15 @@ const gltfPipeline = require("gltf-pipeline");
 const fsExtra = require("fs-extra");
 const pino = require("pino");
 const { NodeIO } = require("@gltf-transform/core");
-const {  weld, simplify } = require("@gltf-transform/functions");
+const {
+  weld,
+  simplify,
+  textureCompress,
+} = require("@gltf-transform/functions");
 const { ALL_EXTENSIONS } = require("@gltf-transform/extensions");
 const { MeshoptSimplifier } = require("meshoptimizer");
 const draco3d = require("draco3dgltf");
+const sharp = require("sharp");
 
 // 创建一个可写流到文件
 const stream = fs.createWriteStream("./my-log.json");
@@ -74,7 +79,6 @@ const main = async () => {
         const document = await io.readBinary(glb);
         await reduceFace(document, tile.content.uri);
         const reduceFaceGlb = await io.writeBinary(document);
-
         fsExtra.outputFileSync(
           path.join(
             __dirname,
@@ -138,7 +142,6 @@ const main = async () => {
 
 main();
 
-// 减面
 async function reduceFace(document, uri) {
   // 减面需要这2个主要参数，ratio是减面率，越低减面效果越好，error是误差率，越高，外观变形越严重
   const ratio = 0.75;
@@ -152,6 +155,16 @@ async function reduceFace(document, uri) {
       simplifier: MeshoptSimplifier,
       ratio: ratio,
       error,
+    })
+  );
+
+  await document.transform(
+    textureCompress({
+      encoder: sharp,
+      //最大纹理宽高，并保留纹理的宽高比
+      resize: [1024, 1024],
+      //纹理压缩质量，范围是1-100，可以不传
+      quality: 50,
     })
   );
 }
