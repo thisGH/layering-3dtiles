@@ -1,0 +1,30 @@
+{
+	"dependencies": {
+		"@gltf-transform/core": "^4.0.1",
+		"@gltf-transform/extensions": "^4.0.1",
+		"axios": "^1.7.2",
+		"draco3dgltf": "^1.5.7",
+		"gltf-pipeline": "^4.1.0",
+		"meshoptimizer": "^0.20.0",
+		"pino": "^9.2.0",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.4.5"
+	},
+	"devDependencies": {
+		"@types/node": "^20.14.2"
+	},
+	"scripts": {
+		"start": "ts-node main.ts",
+		"download": "ts-node downloader.ts https://assets.ion.cesium.com/ap-northeast-1/40866/tileset.json"
+	},
+	"pnpm": {
+		"supportedArchitectures": {
+		  "libc": [
+			"musl"
+		  ]
+		},
+		"overrides": {
+		  "sharp": "0.33.3"
+		}
+	  }
+}

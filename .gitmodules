@@ -1,0 +1,3 @@
+[submodule "3dtiles-test"]
+	path = 3dtiles-test
+	url = https://github.com/CHENJIAMIAN/mars3d-max-shihua-3dtiles.git
